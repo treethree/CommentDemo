@@ -1,0 +1,51 @@
+PODS:
+  - Alamofire (4.8.1)
+  - AlamofireObjectMapper (5.2.0):
+    - Alamofire (~> 4.7)
+    - ObjectMapper (~> 3.4)
+  - FluentJ (0.1.0)
+  - ObjectMapper (3.4.2)
+  - SDWebImage (4.4.6):
+    - SDWebImage/Core (= 4.4.6)
+  - SDWebImage/Core (4.4.6)
+  - SVProgressHUD (2.2.5)
+  - TWMessageBarManager (1.8.1)
+
+DEPENDENCIES:
+  - AlamofireObjectMapper (~> 5.2)
+  - FluentJ (from `https://github.com/mojidabckuu/FluentJ.git`, branch `transformers_info`)
+  - SDWebImage (~> 4.0)
+  - SVProgressHUD (~> 2.2)
+  - TWMessageBarManager (~> 1.8)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Alamofire
+    - AlamofireObjectMapper
+    - ObjectMapper
+    - SDWebImage
+    - SVProgressHUD
+    - TWMessageBarManager
+
+EXTERNAL SOURCES:
+  FluentJ:
+    :branch: transformers_info
+    :git: https://github.com/mojidabckuu/FluentJ.git
+
+CHECKOUT OPTIONS:
+  FluentJ:
+    :commit: d0ff392992c35b96e5614abba4fbb57382faaef7
+    :git: https://github.com/mojidabckuu/FluentJ.git
+
+SPEC CHECKSUMS:
+  Alamofire: 16ce2c353fb72865124ddae8a57c5942388f4f11
+  AlamofireObjectMapper: 92b6ce2423a9d159e686f6a1d514a009bf903ddc
+  FluentJ: 36da7e23f5b572cddab8703066cb203ec7b5a5de
+  ObjectMapper: 0d4402610f4e468903ae64629eec4784531e5c51
+  SDWebImage: 3f3f0c02f09798048c47a5ed0a13f17b063572d8
+  SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
+  TWMessageBarManager: fd84e7948ba7968a2b5d9454859135761214ec56
+
+PODFILE CHECKSUM: 7be00a5b0bf0f385fd55c13da9395bc1f228a50d
+
+COCOAPODS: 1.6.1
