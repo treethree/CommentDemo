@@ -8,8 +8,9 @@
 
 import UIKit
 import SVProgressHUD
-class FourthViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
-    
+import CoreLocation
+
+class FourthViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,CLLocationManagerDelegate {
 
     @IBOutlet weak var tblView: UITableView!
     
@@ -21,11 +22,15 @@ class FourthViewController: UIViewController,UITableViewDelegate,UITableViewData
             }
         }
     }
+    var locationManager = CLLocationManager()
+    
+    var custom : CLLocation?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         callMovieAPI()
+        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -43,6 +48,9 @@ class FourthViewController: UIViewController,UITableViewDelegate,UITableViewData
         cell?.lbl3.text = "City: \(obj.location?.city ?? "")"
         cell?.lbl4.text = "Country: \(obj.location?.country ?? "")"
         
+        custom = CLLocation.init(latitude: (obj.location?.lat)!, longitude: (obj.location?.lng)!)
+        //obj.location?.lat
+        
         return cell!
     }
     
@@ -55,5 +63,60 @@ class FourthViewController: UIViewController,UITableViewDelegate,UITableViewData
             self.json_arr.append(contentsOf: arr)
         }
     }
+    
+    
+    func setupLocation(){
+        locationManager.requestWhenInUseAuthorization()
+        //locationManager.requestAlwaysAuthorization()
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.delegate = self
+        if CLLocationManager.authorizationStatus() == .authorizedWhenInUse{
+            locationManager.startUpdatingLocation()
+        }
+        
+    }
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print(error.localizedDescription)
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let loc = locations.last{
+            
+            getCityName(loc: custom!)
+            // print(loc.coordinate)
+            locationManager.stopUpdatingLocation()
+        }
+    }
+    
+//    var city : String?
+//    //var location : CLLocation?
+//    var address : String?
+    func getCityName(loc:CLLocation) {
+        let geoCoder = CLGeocoder()
+        geoCoder.reverseGeocodeLocation(loc) { (placemarks, error) in
+            if let place = placemarks?.last{
+//                self.city = place.locality
+//                //self.location = place.location
+//                self.address = place.thoroughfare
+                print(place.locality)
+                print(place.location)
+                print(place.thoroughfare)
+                
+            }
+        }
+    }
+    
+    
 
+    @IBAction func getLocCellBtn(_ sender: UIButton) {
+        setupLocation()
+        
+//        let alert = UIAlertController(title: "My Title", message: "City: \(city), address: \(address)", preferredStyle: UIAlertController.Style.alert)
+//
+//        // add an action (button)
+//        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+//
+//        // show the alert
+//        self.present(alert, animated: true, completion: nil)
+    }
 }
